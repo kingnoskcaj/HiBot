@@ -1,3 +1,5 @@
+require('dotenv').config({ path: './keys.env' })
+
 // Import discord.js and create the client
 const Discord = require('discord.js')
 const client = new Discord.Client();
@@ -85,4 +87,4 @@ function msToTime(duration) {
   }
 
 // client.login logs the bot in and sets it up for use. You'll enter your token here.
-client.login('MTA4ODE2MTMzMjY0MzIzMzgxMg.GTPzsf.M6qRGH7-pI0Cwww1b3SaggFIuS8i7nP8vI-zd8');
+client.login(process.env.LOGIN);
