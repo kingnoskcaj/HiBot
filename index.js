@@ -15,6 +15,7 @@ var pingHi = null//setImmediate(function () {});
 // Register an event so that when the bot is ready, it will log a messsage to the terminal
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity('#hi', { type: 'WATCHING' })
   botControlChannel = client.channels.cache.find(channel => channel.name === "bot-control")
   hiChannel = client.channels.cache.find(channel => channel.name === "hi")
 })
