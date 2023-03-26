@@ -1,5 +1,8 @@
-//require('dotenv').config({ path: './keys.env' })
+require('dotenv').config({ path: './keys.env' })
+
+//import modules
 var hi = require("./hi");
+var db = require("./db");
 
 // Import discord.js and create the client
 const Discord = require('discord.js')
@@ -9,6 +12,12 @@ const client = new Discord.Client();
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity('#hi', { type: 'WATCHING' })
+})
+
+//When joining a server, register with the db
+client.on("guildCreate", guild => {
+    console.log("Joined a new guild: " + guild.name);
+    db.newServer(guild.id, guild.channels.cache.find(channel => channel.name === "bot-control"))
 })
 
 // Register an event to handle incoming messages
