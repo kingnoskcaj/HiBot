@@ -23,7 +23,7 @@ async function newServer(serverId, botChannel) {
         }
         const result = await collection.insertOne(doc);
     }
-    
+
     await dbclient.close();
 }
 
@@ -67,4 +67,22 @@ async function getHi(serverId) {
     return (server);
 }
 
-module.exports = { newServer, getHi, setHi }
+async function setOutputChannel(serverId, channelId){
+   //connect to DB
+   const dbclient = new MongoClient.MongoClient(uri);
+   const database = dbclient.db("HiBot");
+   const collection = database.collection("hi");
+
+   //set updates then push
+   const doc = {
+       $set: {
+           botControl: channelId,
+       },
+   }
+   const query = { server: serverId };
+   const result = await collection.updateOne(query, doc);
+
+   await dbclient.close();
+}
+
+module.exports = { newServer, getHi, setHi, setOutputChannel }
