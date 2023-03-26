@@ -6,7 +6,7 @@ function botCommands(message, client){
         if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.user.id == process.env.DEV){
             switch(command){
                 case("output"):
-                    setOutputChannel(message.guild.id, args[0].slice(2, args[0].length - 1));
+                    setOutputChannel(client, message.guild.id, args[0].slice(2, args[0].length - 1));
                     break;
                 case("stats"):
                 case("my-stats"):
@@ -32,8 +32,9 @@ function botCommands(message, client){
 
 }
 
-async function setOutputChannel(serverId, channelId){
+async function setOutputChannel(client, serverId, channelId){
     await require("./db").setOutputChannel(serverId, channelId);
+    client.channels.cache.get(channelId).send("<@" + client.user.id + "> will output to this channel now :+1:");
 }
 
 function setBotProfilePicture(client, url){
