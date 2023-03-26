@@ -22,7 +22,8 @@ async function checkHi(msg, client){
                 console.log("  deleting \"hi\"")
                 msg.delete();
                 //inform user why their hi is bad
-                botControlChannel.send("Sorry <@" + msg.member.user.id + ">, you tried to say hi too soon :frowning: \nThe next hi can occur in " + msToTime(data.nextHi - msg.createdTimestamp));
+                if (typeof botControlChannel != 'undefined')
+                    botControlChannel.send("Sorry <@" + msg.member.user.id + ">, you tried to say hi too soon :frowning: \nThe next hi can occur in " + msToTime(data.nextHi - msg.createdTimestamp));
             } else{
                 //24 hours since last hi
                 if(msg.member.user.id == data.lastUser){
@@ -31,6 +32,7 @@ async function checkHi(msg, client){
                     console.log("  deleting \"hi\"")
                     msg.delete();
                     //inform user why their hi is bad
+                   if (typeof botControlChannel != 'undefined')
                     botControlChannel.send("Sorry <@" + msg.member.user.id + ">, you said the last hi\nLet somebody else say hi first :slight_smile:");
                 } else {
                     //valid new hi
@@ -58,6 +60,7 @@ async function checkHi(msg, client){
             console.log("  deleting message")
             msg.delete();
             //inform user that only hi is allowed
+           if (typeof botControlChannel != 'undefined')
             botControlChannel.send("Only hi is allowed in <#" + hiChannel + "> <@" + msg.member.user.id + "> :rage:");
         }
     }
