@@ -3,6 +3,7 @@ require('dotenv').config({ path: './keys.env' })
 //import modules
 var hi = require("./hi");
 var db = require("./db");
+var cmd = require("./botControl")
 
 // Import discord.js and create the client
 const Discord = require('discord.js')
@@ -23,6 +24,7 @@ client.on("guildCreate", guild => {
 // Register an event to handle incoming messages
 client.on('message', async msg => {
     hi.checkHi(msg, client);
+    cmd.botCommands(msg, client);
 })
 
 // client.login logs the bot in and sets it up for use. You'll enter your token here.
