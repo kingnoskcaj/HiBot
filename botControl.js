@@ -38,7 +38,7 @@ async function setOutputChannel(client, serverId, channelId){
 }
 
 function setBotProfilePicture(client, url){
-    //default picture url https://dkodod.typepad.com/.a/6a00e398274e398833014e884800d9970d-popup
+    //default picture url https://live.staticflickr.com/3733/13275161795_c98535afe8_n.jpg
     client.user.setAvatar(url);
 }
 
